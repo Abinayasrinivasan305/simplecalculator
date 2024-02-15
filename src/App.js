@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Button from './Button.js';
 
 function App() {
+  const [inputs,setInput]=useState({});
+
+  console.log('Current state:',inputs)
+
+
+  function handleChange(e){
+    const name=e.target.name;
+    const value=e.target.value;
+    setInput((previoustate)=>{return{...previoustate,[name]:value}})
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="container">
+      <label htmlFor='input'>Enter your first number:</label><br/>
+       <input type="text" id="input" name="number1" className='inputtext' onChange={handleChange} /><br/>
+       <label htmlFor='input'>Enter your Second number:</label><br/>
+       <input type="text" id="input" name="number2" className='inputtext' onChange={handleChange}/><br/>
+       <Button inputnumbers={inputs}/>
+       
+     
+</div>
+    
+            
   );
 }
 
